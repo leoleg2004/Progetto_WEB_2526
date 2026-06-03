@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: progetto_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: leonardo
+      MYSQL_DATABASE: Progetto_WEB
+    volumes:
+      - db_data:/var/lib/mysql
+      # Qualsiasi file .sql posizionato nella cartella db_init verrà eseguito in automatico alla prima creazione del container
+      - ./db_init:/docker-entrypoint-initdb.d
+    networks:
+      - webnet
+
+  app:
+    build: .
+    container_name: progetto_tomcat
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=jdbc:mysql://db:3306/Progetto_WEB
+      - DB_USER=root
+      - DB_PASSWORD=leonardo
+    depends_on:
+      - db
+    networks:
+      - webnet
+
+networks:
+  webnet:
+
+volumes:
+  db_data:
