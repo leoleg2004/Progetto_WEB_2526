@@ -105,7 +105,7 @@
             <div th:if="${totalPages > 1}" class="pagination">
                 <a th:if="${page > 1}" th:href="@{/(page=${page - 1}, cerca-num=${cercaNum}, cerca-tipo=${cercaTipo})}">&laquo; Precedente</a>
                 
-                <th:block th:with="startP=${T(java.lang.Math).max(1, page - 2)}, endP=${T(java.lang.Math).min(totalPages, page + 2)}">
+                <th:block th:with="startP=${page > 3 ? page - 2 : 1}, endP=${totalPages > page + 2 ? page + 2 : totalPages}">
                     
                     <th:block th:if="${startP > 1}">
                         <a th:href="@{/(page=1, cerca-num=${cercaNum}, cerca-tipo=${cercaTipo})}">1</a>
@@ -134,6 +134,8 @@
         </main>
     </div>
 
-    <footer class="site-footer"></footer>
+    <footer class="site-footer" style="text-align: center; padding: 20px; font-size: 0.9rem; color: var(--text-muted); margin-top: 40px; border-top: 1px solid var(--border-color);">
+        <p>Progetto accademico per l'esame di Programmazione Web</p>
+    </footer>
 </body>
 </html>

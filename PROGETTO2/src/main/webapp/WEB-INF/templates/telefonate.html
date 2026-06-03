@@ -72,11 +72,25 @@
                 </div>
                 
                 <div th:if="${totalPages > 1}" class="pagination">
-                    <a th:if="${page > 1}" th:href="@{/telefonate.php(page=${page - 1}) + ${paramsUrl}}">&laquo; Precedente</a>
-                    <span th:each="i : ${#numbers.sequence(1, totalPages)}">
-                        <a th:href="@{/telefonate.php(page=${i}) + ${paramsUrl}}" th:class="${i == page ? 'current' : ''}" th:text="${i}"></a>
-                    </span>
-                    <a th:if="${page < totalPages}" th:href="@{/telefonate.php(page=${page + 1}) + ${paramsUrl}}">Successiva &raquo;</a>
+                    <a th:if="${page > 1}" th:href="@{/telefonate.php(page=${page - 1})} + ${paramsUrl}">&laquo; Precedente</a>
+                    
+                    <th:block th:with="startP=${page > 3 ? page - 2 : 1}, endP=${totalPages > page + 2 ? page + 2 : totalPages}">
+                        <th:block th:if="${startP > 1}">
+                            <a th:href="@{/telefonate.php(page=1)} + ${paramsUrl}">1</a>
+                            <span th:if="${startP > 2}" class="dots" style="padding: 0.5rem; color: var(--text-muted);">...</span>
+                        </th:block>
+                        
+                        <a th:each="i : ${#numbers.sequence(startP, endP)}"
+                           th:href="@{/telefonate.php(page=${i})} + ${paramsUrl}"
+                           th:class="${i == page ? 'current' : ''}" th:text="${i}"></a>
+                           
+                        <th:block th:if="${endP < totalPages}">
+                            <span th:if="${endP < totalPages - 1}" class="dots" style="padding: 0.5rem; color: var(--text-muted);">...</span>
+                            <a th:href="@{/telefonate.php(page=${totalPages})} + ${paramsUrl}" th:text="${totalPages}"></a>
+                        </th:block>
+                    </th:block>
+
+                    <a th:if="${page < totalPages}" th:href="@{/telefonate.php(page=${page + 1})} + ${paramsUrl}">Successiva &raquo;</a>
                 </div>
             </div>
 
@@ -85,5 +99,8 @@
             </div>
         </main>
     </div>
+    <footer class="site-footer" style="text-align: center; padding: 20px; font-size: 0.9rem; color: var(--text-muted); margin-top: 40px; border-top: 1px solid var(--border-color);">
+        <p>Progetto accademico per l'esame di Programmazione Web</p>
+    </footer>
 </body>
 </html>
