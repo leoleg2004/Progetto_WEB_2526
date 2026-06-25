@@ -4,6 +4,9 @@ echo ========================================================
 echo   Avvio compilazione Maven (Deploy Locale Automatico)
 echo ========================================================
 
+:: Spostati nella cartella dello script
+cd /d "%~dp0"
+
 :: --- 0. CONTROLLO REQUISITI ---
 echo.
 echo [0/4] Controllo requisiti di sistema...
@@ -33,10 +36,7 @@ set DB_PASS=leonardo
 
 echo Creazione del database 'Progetto_WEB' se non esiste...
 :: Prova con password, se fallisce prova senza
-mysql -u %DB_USER% -p%DB_PASS% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;" >nul 2>&1
-IF %ERRORLEVEL% NEQ 0 (
-    mysql -u %DB_USER% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;" >nul 2>&1
-)
+mysql -u %DB_USER% -p%DB_PASS% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;" || mysql -u %DB_USER% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;"
 
 IF %ERRORLEVEL% NEQ 0 (
     echo [ERRORE] Impossibile connettersi a MySQL. Assicurati che sia attivo e che la password di root sia 'leonardo' o assente.
@@ -45,11 +45,14 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 echo Importazione dei dati da db_init\init.sql...
-mysql -u %DB_USER% -p%DB_PASS% Progetto_WEB < db_init\init.sql >nul 2>&1
-IF %ERRORLEVEL% NEQ 0 (
-    mysql -u %DB_USER% Progetto_WEB < db_init\init.sql >nul 2>&1
+mysql -u %DB_USER% -p%DB_PASS% Progetto_WEB < db_init\init.sql || mysql -u %DB_USER% Progetto_WEB < db_init\init.sql
+IF %ERRORLEVEL% EQU 0 (
+    echo [OK] Database configurato!
+) ELSE (
+    echo [ERRORE] Importazione del database fallita.
+    pause
+    exit /b 1
 )
-echo [OK] Database configurato!
 
 :: --- 2. COMPILAZIONE ---
 echo.

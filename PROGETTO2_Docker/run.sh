@@ -3,6 +3,9 @@ echo "========================================================"
 echo "  Avvio compilazione Maven (Deploy Locale Automatico)"
 echo "========================================================"
 
+# Spostati nella cartella dello script (utile se lanciato con doppio clic)
+cd "$(dirname "$0")"
+
 echo "🔍 Fase 0: Controllo requisiti di sistema..."
 
 # Controllo Java
@@ -44,7 +47,7 @@ DB_PASS="leonardo"
 
 echo "⏳ Creazione del database 'Progetto_WEB' se non esiste..."
 # Prova prima con la password 'leonardo', se fallisce prova senza password
-mysql -u $DB_USER -p$DB_PASS -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;" 2>/dev/null || mysql -u $DB_USER -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;" 2>/dev/null
+mysql -u $DB_USER -p$DB_PASS -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;" || mysql -u $DB_USER -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;"
 
 if [ $? -ne 0 ]; then
     echo "❌ Errore durante la connessione a MySQL. Impossibile creare il database."
@@ -53,8 +56,13 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "⏳ Importazione dei dati da db_init/init.sql..."
-mysql -u $DB_USER -p$DB_PASS Progetto_WEB < db_init/init.sql 2>/dev/null || mysql -u $DB_USER Progetto_WEB < db_init/init.sql 2>/dev/null
-echo "✅ Database configurato con successo!"
+mysql -u $DB_USER -p$DB_PASS Progetto_WEB < db_init/init.sql || mysql -u $DB_USER Progetto_WEB < db_init/init.sql
+if [ $? -eq 0 ]; then
+    echo "✅ Database configurato con successo!"
+else
+    echo "❌ Si è verificato un errore durante l'importazione del file init.sql."
+    exit 1
+fi
 
 # --- 2. COMPILAZIONE ---
 echo ""
