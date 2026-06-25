@@ -5,7 +5,7 @@ services:
     image: mysql:8.0
     container_name: progetto_mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_ROOT_PASSWORD: leonardo
       MYSQL_DATABASE: Progetto_WEB
     volumes:
       - db_data:/var/lib/mysql
@@ -22,7 +22,7 @@ services:
     environment:
       - DB_URL=jdbc:mysql://db:3306/Progetto_WEB
       - DB_USER=root
-      - DB_PASSWORD=
+      - DB_PASSWORD=leonardo
     depends_on:
       - db
     networks:
