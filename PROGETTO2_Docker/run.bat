@@ -34,18 +34,32 @@ echo [1/4] Configurazione Database MySQL
 set DB_USER=root
 set DB_PASS=leonardo
 
+echo Verifica credenziali MySQL in corso...
+mysql -u %DB_USER% -p%DB_PASS% -e "SELECT 1;" >nul 2>&1
+IF %ERRORLEVEL% EQU 0 (
+    set MYSQL_CMD=mysql -u %DB_USER% -p%DB_PASS%
+) ELSE (
+    mysql -u %DB_USER% -e "SELECT 1;" >nul 2>&1
+    IF %ERRORLEVEL% EQU 0 (
+        set MYSQL_CMD=mysql -u %DB_USER%
+    ) ELSE (
+        echo [ERRORE] Impossibile connettersi a MySQL con utente root. (Password diversa da 'leonardo' o vuota).
+        pause
+        exit /b 1
+    )
+)
+
 echo Creazione del database 'Progetto_WEB' se non esiste...
-:: Prova con password, se fallisce prova senza
-mysql -u %DB_USER% -p%DB_PASS% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;" || mysql -u %DB_USER% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;"
+%MYSQL_CMD% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;"
 
 IF %ERRORLEVEL% NEQ 0 (
-    echo [ERRORE] Impossibile connettersi a MySQL. Assicurati che sia attivo e che la password di root sia 'leonardo' o assente.
+    echo [ERRORE] Impossibile creare il database.
     pause
     exit /b 1
 )
 
 echo Importazione dei dati da db_init\init.sql...
-mysql -u %DB_USER% -p%DB_PASS% Progetto_WEB < db_init\init.sql || mysql -u %DB_USER% Progetto_WEB < db_init\init.sql
+%MYSQL_CMD% Progetto_WEB < db_init\init.sql
 IF %ERRORLEVEL% EQU 0 (
     echo [OK] Database configurato!
 ) ELSE (

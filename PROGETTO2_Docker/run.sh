@@ -45,18 +45,27 @@ echo "🗄️  Fase 1: Configurazione Database MySQL"
 DB_USER="root"
 DB_PASS="leonardo"
 
-echo "⏳ Creazione del database 'Progetto_WEB' se non esiste..."
-# Prova prima con la password 'leonardo', se fallisce prova senza password
-mysql -u $DB_USER -p$DB_PASS -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;" || mysql -u $DB_USER -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;"
-
-if [ $? -ne 0 ]; then
+echo "⏳ Verifica credenziali MySQL in corso..."
+if mysql -u $DB_USER -p$DB_PASS -e "SELECT 1;" &> /dev/null; then
+    MYSQL_CMD="mysql -u $DB_USER -p$DB_PASS"
+elif mysql -u $DB_USER -e "SELECT 1;" &> /dev/null; then
+    MYSQL_CMD="mysql -u $DB_USER"
+else
     echo "❌ Errore durante la connessione a MySQL. Impossibile creare il database."
     echo "👉 Assicurati che MySQL sia in esecuzione e che la password di root sia 'leonardo' (o vuota)."
     exit 1
 fi
 
+echo "⏳ Creazione del database 'Progetto_WEB' se non esiste..."
+$MYSQL_CMD -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;"
+
+if [ $? -ne 0 ]; then
+    echo "❌ Errore fatale durante la creazione del database."
+    exit 1
+fi
+
 echo "⏳ Importazione dei dati da db_init/init.sql..."
-mysql -u $DB_USER -p$DB_PASS Progetto_WEB < db_init/init.sql || mysql -u $DB_USER Progetto_WEB < db_init/init.sql
+$MYSQL_CMD Progetto_WEB < db_init/init.sql
 if [ $? -eq 0 ]; then
     echo "✅ Database configurato con successo!"
 else
