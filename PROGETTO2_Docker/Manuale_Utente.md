@@ -54,6 +54,13 @@ Il progetto è configurato di default per connettersi a MySQL con utente `root` 
 4. (Opzionale) Qualora lo script non riesca a individuare la directory di Tomcat o ad avviarlo, copiare manualmente il file `target/progetto-web.war` in `<TOMCAT_HOME>/webapps` ed eseguire `startup.sh` (o `startup.bat`).
 5. Accedere all'applicazione tramite browser all'indirizzo: `http://localhost:8080/progetto-web`
 
+### Terminare l'esecuzione
+Per arrestare il server Tomcat avviato dagli script di installazione locale, è possibile utilizzare gli script di spegnimento forniti:
+- **Mac/Linux**: Fare doppio clic su `stop.sh` oppure eseguire da terminale `./stop.sh`
+- **Windows**: Fare doppio clic su `stop.bat` oppure eseguire da terminale `stop.bat`
+
+In alternativa, se è stato effettuato un avvio manuale personalizzato, recarsi nella directory `bin` del proprio Tomcat ed eseguire lo script ufficiale `shutdown.sh` (o `shutdown.bat`).
+
 ---
 
 ## 3. Risoluzione dei Problemi
