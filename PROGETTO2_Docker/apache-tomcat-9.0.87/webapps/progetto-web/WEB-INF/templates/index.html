@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerca Contratti - Progetto Web</title>
+    <!-- Riferimento al file CSS originale della cartella ../codice/css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Centro Gestione Contratti</h1>
+    </header>
+
+    <nav class="site-nav">
+        <ul>
+            <li><a th:href="@{/index.php}">SIM Attive</a></li>
+            <li><a th:href="@{/sim_disattivate.php}">SIM Disattivate</a></li>
+            <li><a th:href="@{/sim_non_attive.php}">SIM Non Attive</a></li>
+            <li><a th:href="@{/}" class="active">Cerca Contratti</a></li>
+            <li><a th:href="@{/telefonate.php}">Cerca Telefonate</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <!-- Interfaccia 1: Filtro Ricerca -->
+        <aside class="filtro-ricerca">
+            <h2>Filtra Contratti</h2>
+            <form th:action="@{/}" method="GET">
+                <div class="form-group">
+                    <label for="cerca-num">Numero Telefono:</label>
+                    <input type="text" id="cerca-num" name="cerca-num" placeholder="Es: 3331234567" th:value="${cercaNum}">
+                </div>
+                <div class="form-group">
+                    <label for="cerca-tipo">Tipo Contratto:</label>
+                    <select id="cerca-tipo" name="cerca-tipo">
+                        <option value="">Tutti</option>
+                        <option value="ricarica" th:selected="${cercaTipo == 'ricarica'}">Ricarica</option>
+                        <option value="consumo" th:selected="${cercaTipo == 'consumo'}">Consumo</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filtra Risultati</button>
+                <a th:href="@{/}" class="btn btn-secondary" style="display:block; text-align:center; margin-top:10px; color:var(--text-muted); text-decoration:underline;">Resetta</a>
+            </form>
+        </aside>
+
+        <!-- Interfaccia 1: Contenuto / Risultati -->
+        <main class="contenuto-risultati">
+            <div class="header-risultati">
+                <div>
+                    <h2>Elenco Contratti Erogati</h2>
+                    <span style="color:var(--text-muted); font-size: 0.9rem;" th:text="'Risultati totali: ' + ${#numbers.formatInteger(totalRows, 1, 'POINT')}">Risultati totali: 0</span>
+                </div>
+            </div>
+            
+            <div th:if="${totalRows > 0}" style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Num. Telefono</th>
+                            <th>Data Attiv.</th>
+                            <th>Piano</th>
+                            <th>Credito/Minuti</th>
+                            <th>SIM Associata (Attiva / Storico)</th>
+                            <th>Azioni (Chiamate)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="row : ${contratti}">
+                            <td><strong th:text="${row.numero}">Numero</strong></td>
+                            <td th:text="${#dates.format(row.dataAttivazione, 'dd/MM/yyyy')}">Data</td>
+                            <td><span style="font-size:0.85rem; padding:4px 8px; border-radius:4px; background:var(--bg-body);" th:text="${#strings.capitalize(row.tipo)}">Tipo</span></td>
+                            <td>
+                                <span th:if="${row.tipo == 'ricarica'}" th:text="'€ ' + ${#numbers.formatDecimal(row.creditoResiduo, 1, 2)}">Credito</span>
+                                <span th:if="${row.tipo == 'consumo'}" th:text="${row.minutiResidui} + ' min'">Minuti</span>
+                            </td>
+                            <td>
+                                <div th:if="${row.simAttiva != null}" style="margin-bottom: 5px;">
+                                    <a th:href="@{/index.php(cerca-codice=${row.simAttiva})}" style="text-decoration:none;">
+                                        <span style="font-size:0.85rem; padding:4px 8px; border-radius:4px; background:var(--brand-color); color:black; font-weight: 500; display:inline-block;" title="Vai alla SIM Attiva" th:text="${row.simAttiva} + ' (Attiva)'">
+                                        </span>
+                                    </a>
+                                </div>
+                                
+                                <div th:if="${row.simDisattivate != null}">
+                                    <div th:each="sim_dis : ${#strings.arraySplit(row.simDisattivate, ', ')}" style="margin-bottom: 3px;">
+                                        <a th:href="@{/sim_disattivate.php(cerca-codice=${sim_dis})}" style="text-decoration:none;">
+                                            <span style="font-size:0.85rem; padding:4px 8px; border-radius:4px; background:#e0e0e0; color:#555; font-weight: 500; display:inline-block;" title="Vai alla SIM Disattivata" th:text="${sim_dis} + ' (Disattivata)'">
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <span th:if="${row.simAttiva == null && row.simDisattivate == null}" style="color:var(--text-muted); font-size:0.85rem; font-style:italic;">Nessuna SIM trovata</span>
+                            </td>
+                            <td>
+                                <a th:if="${row.numChiamate > 0}" th:href="@{/telefonate.php(cerca-effettuataDa=${row.numero})}" class="btn btn-sm btn-edit" th:text="'Vedi (' + ${row.numChiamate} + ') Chiamate'">Vedi Chiamate</a>
+                                <span th:if="${row.numChiamate == 0}" style="color:var(--text-muted); font-size:0.85rem; font-weight:500; padding:8px 0; display:inline-block;">Nessuna chiamata</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:if="${totalPages > 1}" class="pagination">
+                <a th:if="${page > 1}" th:href="@{/(page=${page - 1}, cerca-num=${cercaNum}, cerca-tipo=${cercaTipo})}">&laquo; Precedente</a>
+                
+                <th:block th:with="startP=${page > 3 ? page - 2 : 1}, endP=${totalPages > page + 2 ? page + 2 : totalPages}">
+                    
+                    <th:block th:if="${startP > 1}">
+                        <a th:href="@{/(page=1, cerca-num=${cercaNum}, cerca-tipo=${cercaTipo})}">1</a>
+                        <span th:if="${startP > 2}" class="dots">...</span>
+                    </th:block>
+                    
+                    <a th:each="i : ${#numbers.sequence(startP, endP)}"
+                       th:class="${i == page} ? 'current' : ''"
+                       th:href="@{/(page=${i}, cerca-num=${cercaNum}, cerca-tipo=${cercaTipo})}"
+                       th:text="${i}">
+                    </a>
+                    
+                    <th:block th:if="${endP < totalPages}">
+                        <span th:if="${endP < totalPages - 1}" class="dots">...</span>
+                        <a th:href="@{/(page=${totalPages}, cerca-num=${cercaNum}, cerca-tipo=${cercaTipo})}" th:text="${totalPages}"></a>
+                    </th:block>
+                    
+                </th:block>
+
+                <a th:if="${page < totalPages}" th:href="@{/(page=${page + 1}, cerca-num=${cercaNum}, cerca-tipo=${cercaTipo})}">Successiva &raquo;</a>
+            </div>
+
+            <div th:if="${totalRows == 0}">
+                <p style="color:var(--text-muted); font-style:italic; margin-top:20px;">Nessun contratto trovato.</p>
+            </div>
+        </main>
+    </div>
+
+    <footer class="site-footer" style="text-align: center; padding: 20px; font-size: 0.9rem; color: var(--text-muted); margin-top: 40px; border-top: 1px solid var(--border-color);">
+        <p>Progetto accademico per l'esame di Programmazione Web</p>
+    </footer>
+</body>
+</html>

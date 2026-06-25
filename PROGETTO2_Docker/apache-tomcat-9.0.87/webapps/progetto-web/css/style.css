@@ -1,0 +1,847 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    /* ULTRA PREMIUM YELLOW PALETTE - LIGHT THEME */
+    --brand-primary: #FFB703;
+    /* Giallo Arancio vivace (Premium) */
+    --brand-hover: #FB8500;
+    /* Arancio Scuro per hover */
+    --brand-dark: #FF9E00;
+    /* Giallo Profondo */
+    --brand-light: #FFEA00;
+    /* Giallo Evidenziatore per dettagli minimi */
+
+    /* Backgrounds & Surfaces (Richiesta Sfondo Giallo) */
+    --bg-body: #FFF7EB;
+    /* Sfondo Giallo Crema (Professional) */
+    --bg-surface: #FFFFFF;
+    /* Bianco puro per le interfacce e le schede */
+    --bg-surface-hover: #FFF1D6;
+    /* Sfondo al passaggio del mouse */
+    --header-bg: #FFB703;
+    /* Header in Full Giallo Primario */
+
+    /* Typography */
+    --text-strong: #023047;
+    /* Blu scuro inchiostro (ottimo contrasto su giallo) */
+    --text-base: #219EBC;
+    /* Azzurro scuro elegante */
+    --text-muted: #8ECAE6;
+    /* Azzurro tenue per testi secondari */
+    --text-header: #FFFFFF;
+    /* Testo bianco per navigazione */
+
+    /* Borders & Accents */
+    --border-color: #FFE1A8;
+    /* Bordo giallo sfumato */
+    --border-light: rgba(0, 0, 0, 0.05);
+
+    /* Effects & Dynamics */
+    --radius-sm: 10px;
+    --radius-md: 20px;
+    --radius-lg: 30px;
+    --radius-table: 16px;
+
+    --shadow-soft: 0 10px 25px -5px rgba(255, 183, 3, 0.2), 0 8px 10px -6px rgba(2, 48, 71, 0.1);
+    --shadow-float: 0 25px 50px -12px rgba(251, 133, 0, 0.25);
+
+    --transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ================= GLOBAL RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Il reset globale garantisce coerenza tra i browser */
+
+/* Custom Webkit Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--brand-primary);
+    border-radius: 6px;
+    border: 3px solid var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-hover);
+}
+
+body {
+    background-color: var(--bg-body);
+    /* Pattern professionale: cerchi concentrici che donano dinamicità allo sfondo crema */
+    background-image: radial-gradient(var(--border-color) 2px, transparent 2px);
+    background-size: 40px 40px;
+    color: var(--text-base);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* min-width rimosso: i riquadri si adattano fluidamente alla finestra */
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 70px;
+    /* Spazio per il footer fisso */
+}
+
+/* ================= HEADER ================= */
+.site-header {
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-dark) 100%);
+    padding: 30px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(251, 133, 0, 0.4);
+    position: relative;
+    border-bottom: 3px solid var(--brand-hover);
+}
+
+.site-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--text-header);
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(2, 48, 71, 0.2);
+}
+
+/* ================= NAVIGATION ================= */
+.site-nav {
+    background-color: var(--bg-surface);
+    padding: 0 40px;
+    box-shadow: 0 10px 30px rgba(255, 183, 3, 0.15);
+    border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.site-nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 0 auto;
+    max-width: 1400px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Nasconde scrollbar su Firefox */
+    -ms-overflow-style: none;
+    /* Nasconde scrollbar su IE/Edge */
+}
+
+.site-nav ul::-webkit-scrollbar {
+    display: none;
+    /* Nasconde scrollbar su Chrome/Safari/Opera */
+}
+
+.site-nav li {
+    flex-shrink: 0;
+    /* Impedisce che i pulsanti si schiaccino stringendo la pagina */
+}
+
+.site-nav a {
+    color: var(--text-strong);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 22px 10px;
+    display: inline-block;
+    position: relative;
+    transition: var(--transition);
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+    color: var(--brand-hover);
+}
+
+/* Effetto capsula hover per la navbar */
+.site-nav a::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background-color: var(--brand-hover);
+    transition: var(--transition);
+    border-radius: 4px 4px 0 0;
+}
+
+.site-nav a:hover::before,
+.site-nav a.active::before {
+    width: 100%;
+}
+
+/* ================= MAIN LAYOUT ================= */
+.main-container {
+    display: flex;
+    flex: 1;
+    padding: 50px 40px;
+    gap: 40px;
+    max-width: 1450px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* --- ASIDE: Sidebar Filtri --- */
+.filtro-ricerca {
+    flex: 0 0 350px;
+    background: var(--bg-surface);
+    padding: 35px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color);
+    height: fit-content;
+    position: sticky;
+    top: 110px;
+}
+
+.filtro-ricerca h2 {
+    color: var(--text-strong);
+    margin-bottom: 30px;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filtro-ricerca h2::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 28px;
+    background: linear-gradient(180deg, var(--brand-primary), var(--brand-hover));
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-strong);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 16px 20px;
+    background-color: var(--bg-body);
+    border: 2px solid transparent;
+    border-radius: var(--radius-sd);
+    color: var(--text-strong);
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--brand-primary);
+    background-color: var(--bg-surface);
+    outline: none;
+    box-shadow: 0 0 0 5px rgba(255, 183, 3, 0.2);
+}
+
+/* --- MAIN CONTENUTO --- */
+.contenuto-risultati {
+    flex: 1;
+    min-width: 0;
+}
+
+.header-risultati {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    background: var(--bg-surface);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+}
+
+.header-risultati h2 {
+    color: var(--text-strong);
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+/* ================= BUTTONS ================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-hover));
+    color: var(--text-header);
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(251, 133, 0, 0.4);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 12px 30px rgba(251, 133, 0, 0.6);
+    transform: translateY(-4px);
+    background: linear-gradient(135deg, var(--brand-hover), var(--brand-primary));
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--brand-hover);
+    border: 2px solid var(--brand-hover);
+    margin-top: 15px;
+}
+
+.btn-secondary:hover {
+    background: var(--bg-surface-hover);
+    color: var(--brand-dark);
+}
+
+.btn-sm {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+}
+
+.btn-edit {
+    background-color: var(--bg-body);
+    color: var(--brand-hover);
+    border: 1px solid var(--brand-primary);
+}
+
+.btn-deactivate {
+    background-color: #FFF7EC;
+    color: #E67E22;
+    border: 1px solid #FFE1A8;
+}
+
+.btn-activate {
+    background-color: #EBFBFA;
+    color: #00B4D8;
+    border: 1px solid #90E0EF;
+}
+
+.btn-delete {
+    background-color: #FFF0F0;
+    color: #E63946;
+    border: 1px solid #FFCDD2;
+}
+
+.btn-edit:hover {
+    background-color: var(--brand-primary);
+    color: #FFF;
+    border-color: var(--brand-primary);
+}
+
+.btn-deactivate:hover {
+    background-color: #E67E22;
+    color: white;
+    border-color: #E67E22;
+}
+
+.btn-activate:hover {
+    background-color: #00B4D8;
+    color: white;
+    border-color: #00B4D8;
+}
+
+.btn-delete:hover {
+    background-color: #E63946;
+    color: white;
+}
+
+/* Contenitore dei bottoni Modifica / Elimina nelle righe della tabella */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    /* spazio verticale tra i bottoni */
+}
+
+/* Contenitore della tabella: viewport fisso con scrollbar. */
+.table-wrapper {
+    overflow-x: auto;
+    /* Scrollbar orizzontale quando serve */
+    overflow-y: auto;
+    /* Scrollbar verticale quando le righe superano max-height */
+    max-height: calc(100vh - 120px);
+    /* Aumentato per mostrare molte più tuple prima di scrollare internamente */
+    min-height: 300px;
+    -webkit-overflow-scrolling: touch;
+    /* Scroll fluido su iOS */
+}
+
+/* ================= THE STUNNING DATA TABLES ================= */
+.data-table {
+    width: 100%;
+    min-width: 600px;
+    /* La tabella non si stringe oltre: così la scrollbar del .table-wrapper si attiva */
+    border-collapse: separate;
+    border-spacing: 0 16px;
+    /* Huge vertical spacing per un look a "Card" */
+    margin-top: -16px;
+
+}
+
+.data-table th {
+    font-weight: 800;
+    color: var(--text-strong);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 25px 15px;
+    border-bottom: 3px solid var(--border-color);
+    text-align: center;
+}
+
+.data-table td {
+    padding: 25px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.data-table tbody tr {
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-soft);
+    border-radius: var(--radius-table);
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+/* Barra laterale identificativa sinistra in Themed Yellow */
+.data-table tbody td:first-child {
+    position: relative;
+    border-radius: var(--radius-table) 0 0 var(--radius-table);
+}
+
+.data-table tbody td:first-child::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: linear-gradient(180deg, var(--brand-primary), var(--brand-hover));
+    border-radius: var(--radius-table) 0 0 var(--radius-table);
+    transition: var(--transition);
+    opacity: 0.5;
+}
+
+/* Specific colors for SIM entities based on ER Diagram (Azzurro) */
+.data-table-attiva tbody td:first-child::before {
+    background: linear-gradient(180deg, #00B4D8, #0077B6);
+    /* Azzurro intenso */
+}
+
+.data-table-disattiva tbody td:first-child::before {
+    background: linear-gradient(180deg, #90E0EF, #00B4D8);
+    /* Azzurro chiaro */
+}
+
+.data-table-nonattiva tbody td:first-child::before {
+    background: linear-gradient(180deg, #CAF0F8, #90E0EF);
+    /* Azzurro chiarissimo */
+}
+
+.data-table tbody tr:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-float);
+    z-index: 10;
+    border-color: var(--border-color);
+    background-color: var(--bg-surface);
+}
+
+/* Specific hover shadow for SIM entities */
+.data-table-attiva tbody tr:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 180, 216, 0.25);
+}
+
+.data-table-disattiva tbody tr:hover {
+    box-shadow: 0 25px 50px -12px rgba(144, 224, 239, 0.4);
+}
+
+.data-table-nonattiva tbody tr:hover {
+    box-shadow: 0 25px 50px -12px rgba(202, 240, 248, 0.5);
+}
+
+.data-table tbody tr:hover::before {
+    opacity: 1;
+    width: 8px;
+}
+
+.data-table tbody td:first-child {
+    border-radius: var(--radius-table) 0 0 var(--radius-table);
+}
+
+.data-table tbody td:last-child {
+    border-radius: 0 var(--radius-table) var(--radius-table) 0;
+}
+
+.data-table td strong {
+    color: var(--text-strong);
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+/* ================= PAGINATION ================= */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 60px;
+    padding-top: 40px;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 48px;
+    padding: 0 18px;
+    border-radius: var(--radius-sm);
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.pagination a {
+    background-color: var(--bg-surface);
+    color: var(--text-strong);
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+}
+
+.pagination a:hover {
+    background-color: var(--brand-hover);
+    color: var(--text-header);
+    border-color: var(--brand-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(251, 133, 0, 0.4);
+}
+
+.pagination .current {
+    background-color: var(--brand-primary);
+    color: var(--text-header);
+    border: 2px solid var(--brand-primary);
+    box-shadow: 0 10px 20px rgba(255, 183, 3, 0.4);
+}
+
+/* ================= MODALS OVERHAUL ================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 48, 71, 0.6);
+    /* Sfondo blurato in contrasto blu-navy elegante */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--bg-surface);
+    padding: 50px;
+    border-radius: var(--radius-lg);
+    width: 550px;
+    max-width: 90%;
+    transform: translateY(60px) scale(0.9);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 183, 3, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fascia gialla decorativa in alto sulla modale */
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-hover));
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.modal-header h2 {
+    font-size: 2rem;
+    color: var(--text-strong);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.close-btn {
+    background: #FFF1D6;
+    color: var(--brand-hover);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.close-btn:hover {
+    background: #FFE2E2;
+    color: #E63946;
+    transform: rotate(90deg);
+}
+
+/* ================= ALERTS ================= */
+.alert {
+    padding: 20px 30px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 35px;
+    font-weight: 700;
+    border-left: 8px solid;
+    box-shadow: var(--shadow-soft);
+}
+
+.alert-success {
+    background: #ECFDF5;
+    color: #047857;
+    border-color: #10B981;
+}
+
+.alert-danger {
+    background: #FEF2F2;
+    color: #B91C1C;
+    border-color: #EF4444;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1000px) {
+    .site-nav {
+        padding: 0 15px;
+        /* Riduciamo il padding laterale su mobile */
+    }
+
+    .site-nav ul {
+        justify-content: flex-start;
+        /* Evita il taglio a sinistra quando la barra scrolla */
+        gap: 20px;
+    }
+
+    .main-container {
+        flex-direction: column;
+        padding: 25px;
+        gap: 30px;
+    }
+
+    .filtro-ricerca {
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+}
+
+/* ================= FOOTER ================= */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+    text-align: center;
+    padding: 15px 20px;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+    border-top: 2px solid var(--border-color);
+    z-index: 1000;
+}
+
+.site-footer::after {
+    content: "Disclaimer: Questo sito è stato realizzato esclusivamente come progetto d'esame per il corso di Programmazione Web.";
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.undo-toast {
+    position: fixed;
+    bottom: 80px;
+    /* sopra il footer fisso */
+    left: 50%;
+    transform: translateX(-50%) translateY(140px);
+    background: #ffffff;
+    /* sfondo bianco */
+    color: var(--text-strong);
+    /* testo scuro */
+    border-radius: var(--radius-md);
+    min-width: 380px;
+    max-width: 92vw;
+    border: 2px solid var(--brand-hover);
+    /* contorno arancio */
+    box-shadow: 0 12px 40px rgba(251, 133, 0, 0.18), 0 4px 16px rgba(2, 48, 71, 0.08);
+    z-index: 99999;
+    overflow: hidden;
+    opacity: 0;
+    transition: transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        opacity 0.4s ease;
+}
+
+.undo-toast.active {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.undo-toast.dismissed {
+    transform: translateX(-50%) translateY(140px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.35s ease;
+}
+
+/* Barra di progresso in cima al toast */
+.undo-toast-progress {
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-hover));
+    transform-origin: left;
+}
+
+.undo-toast-body {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+}
+
+.undo-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.undo-message {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-strong);
+    /* testo scuro su sfondo bianco */
+}
+
+.undo-message strong {
+    color: var(--brand-hover);
+    /* arancio per il codice SIM */
+    font-weight: 700;
+}
+
+.undo-btn {
+    background: var(--brand-primary);
+    color: var(--text-strong);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 10px 20px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition);
+    flex-shrink: 0;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.undo-btn:hover {
+    background: var(--brand-hover);
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(251, 133, 0, 0.5);
+}
+
+/* Autocomplete suggestions dropdown styles */
+.autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-surface);
+    border: 2px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    box-shadow: var(--shadow-soft);
+    z-index: 10000;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: -10px; /* aligns nicely with active input */
+}
+
+.autocomplete-suggestion {
+    padding: 12px 20px;
+    cursor: pointer;
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-strong);
+    transition: var(--transition);
+    border-bottom: 1px solid var(--bg-body);
+}
+
+.autocomplete-suggestion:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-suggestion:hover {
+    background-color: var(--bg-surface-hover);
+    color: var(--brand-hover);
+}

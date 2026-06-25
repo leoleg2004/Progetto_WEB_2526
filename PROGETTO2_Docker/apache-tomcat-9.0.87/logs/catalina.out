@@ -1,0 +1,46 @@
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+25-Jun-2026 15:50:35.436 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+25-Jun-2026 15:50:35.438 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+25-Jun-2026 15:50:35.438 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+25-Jun-2026 15:50:35.439 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+25-Jun-2026 15:50:35.439 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.17.0-29-generic
+25-Jun-2026 15:50:35.439 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+25-Jun-2026 15:50:35.439 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-17-openjdk-arm64
+25-Jun-2026 15:50:35.439 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           17.0.18+8-Ubuntu-125.10.1
+25-Jun-2026 15:50:35.439 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Ubuntu
+25-Jun-2026 15:50:35.439 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87
+25-Jun-2026 15:50:35.439 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87
+25-Jun-2026 15:50:35.446 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+25-Jun-2026 15:50:35.448 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/conf/logging.properties
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87
+25-Jun-2026 15:50:35.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/temp
+25-Jun-2026 15:50:35.453 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/usr/local/lib/:/usr/java/packages/lib:/usr/lib/aarch64-linux-gnu/jni:/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu:/usr/lib/jni:/lib:/usr/lib]
+25-Jun-2026 15:50:35.589 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+25-Jun-2026 15:50:35.599 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [256] milliseconds
+25-Jun-2026 15:50:35.621 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+25-Jun-2026 15:50:35.622 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+25-Jun-2026 15:50:35.634 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/progetto-web.war]
+25-Jun-2026 15:50:36.088 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+25-Jun-2026 15:50:36.109 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/progetto-web.war] has finished in [474] ms
+25-Jun-2026 15:50:36.109 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/ROOT]
+25-Jun-2026 15:50:36.117 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/ROOT] has finished in [8] ms
+25-Jun-2026 15:50:36.118 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/manager]
+25-Jun-2026 15:50:36.132 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/manager] has finished in [14] ms
+25-Jun-2026 15:50:36.132 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/docs]
+25-Jun-2026 15:50:36.140 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/docs] has finished in [8] ms
+25-Jun-2026 15:50:36.140 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/host-manager]
+25-Jun-2026 15:50:36.149 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/host-manager] has finished in [9] ms
+25-Jun-2026 15:50:36.149 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/examples]
+25-Jun-2026 15:50:36.229 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/leonardo/Desktop/Progetto_WEB_2526/PROGETTO2_Docker/apache-tomcat-9.0.87/webapps/examples] has finished in [80] ms
+25-Jun-2026 15:50:36.230 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+25-Jun-2026 15:50:36.236 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [636] milliseconds
