@@ -34,7 +34,7 @@ echo [1/4] Configurazione Database MySQL
 set DB_USER=root
 set DB_PASS=leonardo
 
-echo Verifica credenziali e stato MySQL in corso...
+echo Verifica stato MySQL in corso...
 mysql -u %DB_USER% -p%DB_PASS% -e "SELECT 1;" >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     set MYSQL_CMD=mysql -u %DB_USER% -p%DB_PASS%
@@ -43,25 +43,9 @@ IF %ERRORLEVEL% EQU 0 (
     IF %ERRORLEVEL% EQU 0 (
         set MYSQL_CMD=mysql -u %DB_USER%
     ) ELSE (
-        echo [AVVISO] MySQL non risponde. Tento di avviare il servizio in automatico...
-        net start MySQL >nul 2>&1
-        IF %ERRORLEVEL% NEQ 0 net start MySQL80 >nul 2>&1
-        timeout /t 3 /nobreak >nul
-        
-        :: Riprovo
-        mysql -u %DB_USER% -p%DB_PASS% -e "SELECT 1;" >nul 2>&1
-        IF !ERRORLEVEL! EQU 0 (
-            set MYSQL_CMD=mysql -u %DB_USER% -p%DB_PASS%
-        ) ELSE (
-            mysql -u %DB_USER% -e "SELECT 1;" >nul 2>&1
-            IF !ERRORLEVEL! EQU 0 (
-                set MYSQL_CMD=mysql -u %DB_USER%
-            ) ELSE (
-                echo [ERRORE] Impossibile avviare o connettersi a MySQL.
-                pause
-                exit /b 1
-            )
-        )
+        echo [ERRORE] Impossibile connettersi a MySQL con utente root. (Password diversa da 'leonardo' o vuota).
+        pause
+        exit /b 1
     )
 )
 

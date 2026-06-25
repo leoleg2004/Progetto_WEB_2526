@@ -37,9 +37,9 @@ Questa modalità compila il sorgente tramite Maven Wrapper e distribuisce il pac
 3. Installare **MySQL Server** e assicurarsi che il demone sia in esecuzione.
 
 ### Procedura di Configurazione Credenziali (Importante)
-Il progetto è configurato di default per connettersi a MySQL con utente `root` e password `leonardo` (oppure nessuna password). Se l'installazione MySQL locale possiede credenziali differenti:
-1. Aprire il file `run.sh` (Mac/Linux) o `run.bat` (Windows) e modificare i valori delle variabili `DB_USER` e `DB_PASS` inserendo le proprie credenziali.
-2. Aprire il file `src/main/java/it/unifi/progettoweb/utils/DBConnection.java` e aggiornare i valori di `USER` e `PASSWORD` in conformità al punto precedente.
+Il progetto è configurato di default per connettersi a MySQL con utente `root` e nessuna password. Se l'installazione MySQL locale possiede credenziali differenti (es. una password specifica):
+1. Aprire il file `run.sh` (Mac/Linux) o `run.bat` (Windows) e modificare i valori della variabile `DB_PASS` inserendo la propria password, oppure lasciare invariato.
+2. Aprire il file `src/main/java/it/unifi/progettoweb/utils/DBConnection.java` e aggiornare il fallback per la propria password.
 
 ### Procedura di Installazione
 1. Aprire un terminale e posizionarsi nella directory principale del progetto.

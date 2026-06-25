@@ -45,34 +45,15 @@ echo "🗄️  Fase 1: Configurazione Database MySQL"
 DB_USER="root"
 DB_PASS="leonardo"
 
-echo "⏳ Verifica credenziali e stato MySQL in corso..."
+echo "⏳ Verifica stato MySQL in corso..."
 if mysql -u $DB_USER -p$DB_PASS -e "SELECT 1;" &> /dev/null; then
     MYSQL_CMD="mysql -u $DB_USER -p$DB_PASS"
 elif mysql -u $DB_USER -e "SELECT 1;" &> /dev/null; then
     MYSQL_CMD="mysql -u $DB_USER"
 else
-    echo "⚠️ MySQL non risponde. Tento di avviare il servizio in automatico..."
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        brew services start mysql &> /dev/null
-    elif command -v systemctl &> /dev/null; then
-        sudo systemctl start mysql 2>/dev/null || sudo systemctl start mysqld 2>/dev/null
-    elif command -v service &> /dev/null; then
-        sudo service mysql start 2>/dev/null || sudo service mysqld start 2>/dev/null
-    fi
-    
-    echo "⏳ Attesa riavvio MySQL..."
-    sleep 3
-    
-    # Riprovo
-    if mysql -u $DB_USER -p$DB_PASS -e "SELECT 1;" &> /dev/null; then
-        MYSQL_CMD="mysql -u $DB_USER -p$DB_PASS"
-    elif mysql -u $DB_USER -e "SELECT 1;" &> /dev/null; then
-        MYSQL_CMD="mysql -u $DB_USER"
-    else
-        echo "❌ Errore critico: Impossibile avviare o connettersi a MySQL."
-        echo "👉 Assicurati che MySQL sia installato, avviato e che l'utente 'root' abbia password 'leonardo' o vuota."
-        exit 1
-    fi
+    echo "❌ Errore durante la connessione a MySQL. Impossibile creare il database."
+    echo "👉 Assicurati che MySQL sia in esecuzione e che la password di root sia 'leonardo' (o vuota)."
+    exit 1
 fi
 
 echo "⏳ Creazione del database 'Progetto_WEB' se non esiste..."

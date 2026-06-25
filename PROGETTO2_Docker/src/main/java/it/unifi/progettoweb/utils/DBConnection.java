@@ -19,6 +19,18 @@ public class DBConnection {
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+        // Se c'è una password esplicita nelle variabili d'ambiente (Docker), usa quella.
+        String envPassword = System.getenv("DB_PASSWORD");
+        if (envPassword != null) {
+            return DriverManager.getConnection(URL, USER, envPassword);
+        }
+
+        // Deploy locale: Prova prima con la password 'leonardo', se fallisce prova senza password.
+        try {
+            return DriverManager.getConnection(URL, USER, "leonardo");
+        } catch (SQLException e) {
+            // Se fallisce per accesso negato, riprova con password vuota
+            return DriverManager.getConnection(URL, USER, "");
+        }
     }
 }
