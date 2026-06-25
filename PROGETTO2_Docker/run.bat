@@ -4,9 +4,29 @@ echo ========================================================
 echo   Avvio compilazione Maven (Deploy Locale Automatico)
 echo ========================================================
 
+:: --- 0. CONTROLLO REQUISITI ---
+echo.
+echo [0/4] Controllo requisiti di sistema...
+
+java -version >nul 2>&1
+IF %ERRORLEVEL% NEQ 0 (
+    echo [AVVISO] Java non trovato! Tento l'installazione con winget...
+    winget install --id Oracle.JavaRuntimeEnvironment --accept-source-agreements --accept-package-agreements >nul 2>&1
+) ELSE (
+    echo [OK] Java e' installato.
+)
+
+mysql --version >nul 2>&1
+IF %ERRORLEVEL% NEQ 0 (
+    echo [AVVISO] MySQL non trovato! Tento l'installazione con winget...
+    winget install --id Oracle.MySQL --accept-source-agreements --accept-package-agreements >nul 2>&1
+) ELSE (
+    echo [OK] MySQL e' installato.
+)
+
 :: --- 1. CONFIGURAZIONE DATABASE ---
 echo.
-echo [1/3] Configurazione Database MySQL
+echo [1/4] Configurazione Database MySQL
 
 set DB_USER=root
 set DB_PASS=leonardo
@@ -33,7 +53,7 @@ echo [OK] Database configurato!
 
 :: --- 2. COMPILAZIONE ---
 echo.
-echo [2/3] Compilazione del progetto Java...
+echo [2/4] Compilazione del progetto Java...
 call mvnw.cmd clean package
 
 IF %ERRORLEVEL% NEQ 0 (
@@ -45,10 +65,23 @@ echo [OK] Compilazione completata con successo!
 
 :: --- 3. DEPLOY E AVVIO ---
 echo.
-echo [3/3] Deploy su Tomcat
+echo [3/4] Deploy su Tomcat
+
+IF NOT DEFINED TOMCAT_HOME (
+    IF EXIST "apache-tomcat-9.0.87" (
+        set TOMCAT_HOME=%CD%\apache-tomcat-9.0.87
+    ) ELSE (
+        echo [AVVISO] Variabile TOMCAT_HOME non definita. Scaricamento Tomcat locale in corso...
+        powershell -Command "Invoke-WebRequest -Uri 'https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87-windows-x64.zip' -OutFile 'tomcat.zip'"
+        powershell -Command "Expand-Archive -Path 'tomcat.zip' -DestinationPath '.'"
+        del tomcat.zip
+        set TOMCAT_HOME=%CD%\apache-tomcat-9.0.87
+    )
+)
+
 IF DEFINED TOMCAT_HOME (
     echo Copia del file .war nella cartella webapps di Tomcat...
-    copy /Y target\progetto-web.war "%TOMCAT_HOME%\webapps\"
+    copy /Y target\progetto-web.war "%TOMCAT_HOME%\webapps\" >nul
     
     IF EXIST "%TOMCAT_HOME%\bin\startup.bat" (
         echo Avvio di Tomcat in corso...
@@ -58,8 +91,7 @@ IF DEFINED TOMCAT_HOME (
     )
     echo [OK] Deploy completato!
 ) ELSE (
-    echo [AVVISO] Variabile TOMCAT_HOME non definita.
-    echo Copia manualmente target\progetto-web.war nella cartella webapps di Tomcat.
+    echo [AVVISO] Errore critico nel setup di Tomcat.
 )
 
 echo.
