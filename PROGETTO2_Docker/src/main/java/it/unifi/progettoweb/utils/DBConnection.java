@@ -19,18 +19,22 @@ public class DBConnection {
     }
 
     public static Connection getConnection() throws SQLException {
-        // Se c'è una password esplicita nelle variabili d'ambiente (Docker), usa quella.
+        // Docker: usa la variabile d'ambiente DB_PASSWORD se presente
         String envPassword = System.getenv("DB_PASSWORD");
         if (envPassword != null) {
             return DriverManager.getConnection(URL, USER, envPassword);
         }
 
-        // Deploy locale: Prova prima con la password 'leonardo', se fallisce prova senza password.
+        // Deploy locale: prova prima senza password, poi con "leonardo"
         try {
-            return DriverManager.getConnection(URL, USER, "leonardo");
-        } catch (SQLException e) {
-            // Se fallisce per accesso negato, riprova con password vuota
             return DriverManager.getConnection(URL, USER, "");
+        } catch (SQLException e1) {
+            try {
+                return DriverManager.getConnection(URL, USER, "leonardo");
+            } catch (SQLException e2) {
+                throw new SQLException("Impossibile connettersi a MySQL. " +
+                    "Verifica che il servizio sia attivo e che root abbia password vuota o 'leonardo'.", e2);
+            }
         }
     }
 }
