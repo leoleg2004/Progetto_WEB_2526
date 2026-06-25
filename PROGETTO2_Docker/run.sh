@@ -51,9 +51,28 @@ if mysql -u $DB_USER -p$DB_PASS -e "SELECT 1;" &> /dev/null; then
 elif mysql -u $DB_USER -e "SELECT 1;" &> /dev/null; then
     MYSQL_CMD="mysql -u $DB_USER"
 else
-    echo "❌ Errore durante la connessione a MySQL. Impossibile creare il database."
-    echo "👉 Assicurati che MySQL sia in esecuzione e che la password di root sia 'leonardo' (o vuota)."
-    exit 1
+    echo "⚠️ Impossibile connettersi come utente standard. Tento l'accesso tramite sudo per fix automatico (inserisci la password del PC se richiesta)..."
+    if sudo mysql -e "SELECT 1;" &> /dev/null; then
+        echo "✅ Accesso root riuscito. Configuro l'utente '$DB_USER' per accettare la password..."
+        sudo mysql -e "ALTER USER '$DB_USER'@'localhost' IDENTIFIED WITH caching_sha2_password BY '$DB_PASS'; FLUSH PRIVILEGES;" &> /dev/null
+        if [ $? -ne 0 ]; then
+            # Se la sintassi precedente fallisce (versioni più vecchie), prova la native
+            sudo mysql -e "ALTER USER '$DB_USER'@'localhost' IDENTIFIED WITH mysql_native_password BY '$DB_PASS'; FLUSH PRIVILEGES;" &> /dev/null
+        fi
+        
+        # Verifica se il fix ha funzionato
+        if mysql -u $DB_USER -p$DB_PASS -e "SELECT 1;" &> /dev/null; then
+            MYSQL_CMD="mysql -u $DB_USER -p$DB_PASS"
+            echo "✅ Configurazione automatica di MySQL completata!"
+        else
+            echo "❌ Errore: fix automatico fallito. Assicurati che l'utente root possa loggarsi."
+            exit 1
+        fi
+    else
+        echo "❌ Errore durante la connessione a MySQL. Impossibile creare il database."
+        echo "👉 Assicurati che MySQL sia installato e in esecuzione (sudo systemctl status mysql)."
+        exit 1
+    fi
 fi
 
 echo "⏳ Creazione del database 'Progetto_WEB' se non esiste..."
