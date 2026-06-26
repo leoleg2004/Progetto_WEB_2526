@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [26/Jun/2026:14:36:58 +0200] "GET /progetto-web HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [26/Jun/2026:14:37:00 +0200] "GET /progetto-web/css/style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [26/Jun/2026:14:37:00 +0200] "GET /progetto-web/ HTTP/1.1" 200 73232
+0:0:0:0:0:0:0:1 - - [26/Jun/2026:14:37:01 +0200] "GET /progetto-web/sim_non_attive.php HTTP/1.1" 200 26802
+0:0:0:0:0:0:0:1 - - [26/Jun/2026:14:37:01 +0200] "GET /progetto-web/js/script.js;jsessionid=3FF0A883A488E35D2CE1A234B8984D4A HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [26/Jun/2026:14:37:01 +0200] "GET /progetto-web/css/style.css;jsessionid=3FF0A883A488E35D2CE1A234B8984D4A HTTP/1.1" 200 20750
+0:0:0:0:0:0:0:1 - - [26/Jun/2026:14:37:02 +0200] "GET /progetto-web/sim_disattivate.php;jsessionid=3FF0A883A488E35D2CE1A234B8984D4A HTTP/1.1" 200 22003
+0:0:0:0:0:0:0:1 - - [26/Jun/2026:14:37:02 +0200] "GET /progetto-web/js/script.js HTTP/1.1" 304 -

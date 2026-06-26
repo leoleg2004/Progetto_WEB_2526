@@ -117,15 +117,18 @@ set "MYSQL_ARGS=-u %DB_USER%"
 if not "%DB_PASS%"=="" set "MYSQL_ARGS=%MYSQL_ARGS% -p%DB_PASS%"
 
 echo Creazione database 'Progetto_WEB' se non esiste...
-"%MYSQL_EXE%" %MYSQL_ARGS% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB;"
+"%MYSQL_EXE%" %MYSQL_ARGS% -e "CREATE DATABASE IF NOT EXISTS Progetto_WEB CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
 if %errorlevel% neq 0 (
     echo [ERRORE] Impossibile creare il database.
     pause
     exit /b 1
 )
+:: Forza la collation corretta anche se il DB esisteva gia' con quella sbagliata
+:: (risolve incompatibilita' FK tra MySQL 8.4 Windows e dump generato su macOS/MySQL 9.x)
+"%MYSQL_EXE%" %MYSQL_ARGS% -e "ALTER DATABASE Progetto_WEB CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
 
 echo Importazione dati da db_init\init.sql...
-"%MYSQL_EXE%" %MYSQL_ARGS% Progetto_WEB < "db_init\init.sql"
+"%MYSQL_EXE%" %MYSQL_ARGS% --default-character-set=utf8mb4 Progetto_WEB < "db_init\init.sql"
 if %errorlevel% equ 0 (
     echo [OK] Database configurato con successo!
 ) else (

@@ -1,4 +1,4 @@
-USE Progetto_WEB;
+﻿USE Progetto_WEB;
 -- MySQL dump 10.13  Distrib 9.3.0, for macos15.2 (arm64)
 --
 -- Host: localhost    Database: Progetto_WEB
@@ -54,9 +54,9 @@ DROP TABLE IF EXISTS `SIMAttiva`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `SIMAttiva` (
-  `codice` varchar(50) NOT NULL,
-  `tipoSIM` varchar(20) NOT NULL,
-  `associataA` varchar(20) NOT NULL,
+  `codice` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tipoSIM` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `associataA` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `dataAttivazione` date NOT NULL,
   PRIMARY KEY (`codice`),
   UNIQUE KEY `uni_associataA` (`associataA`),
@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `SIMDisattiva`;
 CREATE TABLE `SIMDisattiva` (
   `codice` varchar(50) NOT NULL,
   `tipoSIM` varchar(20) NOT NULL,
-  `eraAssociataA` varchar(20) NOT NULL,
+  `eraAssociataA` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `dataAttivazione` date NOT NULL,
   `dataDisattivazione` date NOT NULL,
   PRIMARY KEY (`codice`),
