@@ -1,82 +1,80 @@
-# Manuale Tecnico di Installazione e Deploy
+# Manuale Utente
 
-Il presente documento descrive le procedure per l'installazione e il deploy dell'applicazione Web "Progetto_WEB". È possibile scegliere tra un'installazione tramite ambiente virtuale Docker (consigliata) e un'installazione locale tradizionale.
+## Cosa si sta installando
+L'applicazione "Centro Gestione Contratti" permette di gestire contratti telefonici, SIM e telefonate.
+L'installazione prevede il caricamento del database MySQL e la distribuzione dell'applicazione Java nel server Tomcat.
 
 ---
 
-## 1. Deploy tramite Docker (Consigliato)
-
-Questa modalità installa e configura automaticamente il database MySQL, il Web Server Tomcat e l'applicazione isolandoli dal resto del sistema.
+## 1. Deploy Locale
 
 ### Prerequisiti
-1. Installare **Docker Desktop**.
-2. Verificare che le porte `8080` e `3306` non siano in uso da altri servizi locali.
+1. Installare Java Development Kit (versione 8 o 21).
+2. Installare Apache Tomcat (versione 9 o 11).
+3. Installare MySQL Server.
+4. Avviare il demone MySQL.
+
+### Procedura di Configurazione Credenziali
+> [!NOTE]
+> Il progetto è stato testato con l'utente `root` di MySQL senza password. In questa configurazione l'installazione procede in automatico senza richiedere modifiche.
+
+Se MySQL richiede una password specifica, configurare le credenziali:
+1. Aprire il file `run.sh` (Mac/Linux) o `run.bat` (Windows).
+2. Inserire la password di MySQL nella variabile `DB_PASS`.
+3. Aprire il file `src/main/java/it/unifi/progettoweb/utils/DBConnection.java`.
+4. Inserire la password di MySQL nella variabile `PASSWORD`.
+
+### Procedura di Installazione
+1. Aprire un terminale.
+2. Posizionarsi nella cartella principale del progetto.
+3. Eseguire lo script `./run.sh` (Mac/Linux) oppure `run.bat` (Windows).
+4. Attendere il completamento delle operazioni (creazione database, compilazione codice, copia su Tomcat, avvio server Tomcat).
+5. Aprire un browser web.
+6. Visitare l'indirizzo `http://localhost:8080/progetto-web`.
+
+### Procedura di Arresto
+1. Aprire un terminale.
+2. Posizionarsi nella cartella principale del progetto.
+3. Eseguire lo script `./stop.sh` (Mac/Linux) oppure `stop.bat` (Windows).
+
+---
+
+## 2. Deploy tramite Docker (Opzionale)
+
+### Prerequisiti
+1. Installare Docker Desktop.
+2. Liberare le porte 8080 e 3306 disattivando eventuali servizi locali in ascolto.
 
 ### Procedura di Installazione
 1. Avviare Docker Desktop.
-2. Aprire un terminale e posizionarsi nella directory principale del progetto.
-3. Eseguire lo script di avvio in base al sistema operativo:
-   - **Mac/Linux**: Eseguire `./deploy_docker.sh`
-   - **Windows**: Eseguire `deploy_docker.bat`
-4. Attendere il termine del processo di build (creazione container, compilazione e popolamento database).
-5. Accedere all'applicazione tramite browser all'indirizzo: `http://localhost:8080/progetto-web`
+2. Aprire un terminale.
+3. Posizionarsi nella cartella principale del progetto.
+4. Eseguire lo script `./deploy_docker.sh` (Mac/Linux) oppure `deploy_docker.bat` (Windows).
+5. Attendere il completamento della procedura.
+6. Aprire un browser web.
+7. Visitare l'indirizzo `http://localhost:8080/progetto-web`.
 
-### Terminare l'esecuzione
-Per arrestare i servizi, eseguire da terminale nella cartella del progetto:
-`docker-compose down`
-
----
-
-## 2. Deploy Locale Senza Docker
-
-Questa modalità compila il sorgente tramite Maven Wrapper e distribuisce il pacchetto nell'installazione locale di Tomcat.
-
-### Prerequisiti
-1. Installare **Java Development Kit** (versione 8 o 21).
-2. Installare **Apache Tomcat** (versione 9 o 11).
-3. Installare **MySQL Server** e assicurarsi che il demone sia in esecuzione.
-
-### Procedura di Configurazione Credenziali (Importante)
-Il progetto è configurato di default per connettersi a MySQL con utente `root` e nessuna password. Se l'installazione MySQL locale possiede credenziali differenti (es. una password specifica):
-1. Aprire il file `run.sh` (Mac/Linux) o `run.bat` (Windows) e modificare i valori della variabile `DB_PASS` inserendo la propria password, oppure lasciare invariato.
-2. Aprire il file `src/main/java/it/unifi/progettoweb/utils/DBConnection.java` e aggiornare il fallback per la propria password.
-
-### Procedura di Installazione
-1. Aprire un terminale e posizionarsi nella directory principale del progetto.
-2. Eseguire lo script di deploy:
-   - **Mac/Linux**: Eseguire `./run.sh`
-   - **Windows**: Eseguire `run.bat`
-3. Attendere l'esecuzione automatica dello script. Il processo si occuperà di:
-   - Creare il database `Progetto_WEB` e importare la struttura tramite `db_init/init.sql`.
-   - Scaricare le dipendenze e compilare il sorgente Java tramite Maven Wrapper.
-   - Copiare l'archivio compilato `target/progetto-web.war` all'interno della directory `webapps` di Tomcat.
-   - Avviare Tomcat.
-4. (Opzionale) Qualora lo script non riesca a individuare la directory di Tomcat o ad avviarlo, copiare manualmente il file `target/progetto-web.war` in `<TOMCAT_HOME>/webapps` ed eseguire `startup.sh` (o `startup.bat`).
-5. Accedere all'applicazione tramite browser all'indirizzo: `http://localhost:8080/progetto-web`
-
-### Terminare l'esecuzione
-Per arrestare il server Tomcat avviato dagli script di installazione locale, è possibile utilizzare gli script di spegnimento forniti:
-- **Mac/Linux**: Fare doppio clic su `stop.sh` oppure eseguire da terminale `./stop.sh`
-- **Windows**: Fare doppio clic su `stop.bat` oppure eseguire da terminale `stop.bat`
-
-In alternativa, se è stato effettuato un avvio manuale personalizzato, recarsi nella directory `bin` del proprio Tomcat ed eseguire lo script ufficiale `shutdown.sh` (o `shutdown.bat`).
+### Procedura di Arresto
+1. Aprire un terminale.
+2. Posizionarsi nella cartella principale del progetto.
+3. Eseguire il comando `docker-compose down`.
 
 ---
 
-## 3. Risoluzione dei Problemi
+## Risoluzione dei Problemi
 
-* **Problema: Errore "Address already in use" all'avvio**
-  * **Causa**: La porta 8080 o 3306 è occupata da un altro processo.
-  * **Soluzione**: Individuare e terminare l'applicazione in ascolto sulla porta in conflitto.
+**Errore "Address already in use" all'avvio**
+* Causa: La porta 8080 o 3306 risulta occupata.
+* Soluzione: Individuare e terminare l'applicazione in ascolto sulla porta 8080 o 3306.
 
-* **Problema: Permesso negato (Permission denied) su sistemi Mac/Linux**
-  * **Causa**: Mancanza di privilegi di esecuzione sugli script.
-  * **Soluzione**: Eseguire dal terminale: `chmod +x deploy_docker.sh run.sh mvnw`
+**Permesso negato (Permission denied) su sistemi Mac/Linux**
+* Causa: Mancanza di privilegi di esecuzione.
+* Soluzione: Eseguire il comando `chmod +x deploy_docker.sh run.sh stop.sh mvnw`.
 
-* **Problema: Errore "Access denied for user" durante la configurazione del DB in locale**
-  * **Causa**: Le credenziali per accedere al database MySQL fornite al progetto sono errate.
-  * **Soluzione**: Eseguire i passaggi descritti nella sezione "Procedura di Configurazione Credenziali" per allineare il codice ai parametri del proprio MySQL locale.
+**Errore "Access denied for user"**
+* Causa: Credenziali del database errate.
+* Soluzione: Eseguire la "Procedura di Configurazione Credenziali".
 
-* **Problema: Errore 500 o crash durante la navigazione**
-  * **Causa**: Impossibilità di connettersi al database MySQL da parte dell'applicazione Java.
-  * **Soluzione**: Verificare che MySQL Server sia attivo e in esecuzione sulla porta 3306. Verificare la correttezza del file `DBConnection.java`.
+**Errore 500 o crash durante la navigazione**
+* Causa: L'applicazione Java fallisce la connessione al database MySQL.
+* Soluzione: Verificare l'esecuzione del Server MySQL sulla porta 3306. Controllare le credenziali nel file `DBConnection.java`.
