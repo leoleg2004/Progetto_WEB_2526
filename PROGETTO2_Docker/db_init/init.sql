@@ -31,7 +31,7 @@ CREATE TABLE `ContrattoTelefonico` (
   `creditoResiduo` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`numero`),
   CONSTRAINT `chk_tipo_contratto` CHECK ((((`tipo` = _utf8mb3'consumo') and (`minutiResidui` is not null) and (`creditoResiduo` is null)) or ((`tipo` = _utf8mb3'ricarica') and (`minutiResidui` is null) and (`creditoResiduo` is not null))))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `SIMAttiva` (
   PRIMARY KEY (`codice`),
   UNIQUE KEY `uni_associataA` (`associataA`),
   CONSTRAINT `simattiva_ibfk_1` FOREIGN KEY (`associataA`) REFERENCES `ContrattoTelefonico` (`numero`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `SIMDisattiva` (
   PRIMARY KEY (`codice`),
   KEY `eraAssociataA` (`eraAssociataA`),
   CONSTRAINT `simdisattiva_ibfk_1` FOREIGN KEY (`eraAssociataA`) REFERENCES `ContrattoTelefonico` (`numero`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +115,7 @@ CREATE TABLE `SIMNonAttiva` (
   `codice` varchar(50) NOT NULL,
   `tipoSIM` varchar(20) NOT NULL,
   PRIMARY KEY (`codice`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +144,7 @@ CREATE TABLE `Telefonata` (
   `costo` decimal(10,2) NOT NULL,
   PRIMARY KEY (`effettuataDa`,`id`),
   CONSTRAINT `telefonata_ibfk_1` FOREIGN KEY (`effettuataDa`) REFERENCES `ContrattoTelefonico` (`numero`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
