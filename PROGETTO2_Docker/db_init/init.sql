@@ -1,4 +1,4 @@
-﻿USE Progetto_WEB;
+USE Progetto_WEB;
 -- MySQL dump 10.13  Distrib 9.3.0, for macos15.2 (arm64)
 --
 -- Host: localhost    Database: Progetto_WEB
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `ContrattoTelefonico`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ContrattoTelefonico` (
-  `numero` varchar(20) NOT NULL,
+  `numero` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `dataAttivazione` date NOT NULL,
   `tipo` enum('ricarica','consumo') NOT NULL,
   `minutiResidui` int DEFAULT NULL,
