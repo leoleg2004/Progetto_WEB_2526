@@ -83,8 +83,8 @@ DROP TABLE IF EXISTS `SIMDisattiva`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `SIMDisattiva` (
-  `codice` varchar(50) NOT NULL,
-  `tipoSIM` varchar(20) NOT NULL,
+  `codice` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tipoSIM` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `eraAssociataA` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `dataAttivazione` date NOT NULL,
   `dataDisattivazione` date NOT NULL,
@@ -112,8 +112,8 @@ DROP TABLE IF EXISTS `SIMNonAttiva`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `SIMNonAttiva` (
-  `codice` varchar(50) NOT NULL,
-  `tipoSIM` varchar(20) NOT NULL,
+  `codice` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tipoSIM` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`codice`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -137,7 +137,7 @@ DROP TABLE IF EXISTS `Telefonata`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Telefonata` (
   `id` int NOT NULL,
-  `effettuataDa` varchar(20) NOT NULL,
+  `effettuataDa` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `data` date NOT NULL,
   `ora` time NOT NULL,
   `durata` int NOT NULL COMMENT 'Durata in secondi',
