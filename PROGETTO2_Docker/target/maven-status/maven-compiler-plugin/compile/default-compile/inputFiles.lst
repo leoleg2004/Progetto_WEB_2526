@@ -1,21 +1,21 @@
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/ContrattoTelefonicoDAO.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/SIMAttivaDAO.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/SIMDisattivaDAO.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/SIMNonAttivaDAO.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/TelefonataDAO.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/ContrattoTelefonico.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/SIMAttiva.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/SIMDisattiva.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/SIMNonAttiva.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/Telefonata.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/CommitServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/CrudSimServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/MainServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/SIMAttivaServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/SIMDisattivaServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/SIMNonAttivaServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/SuggerisciContrattoLiberoServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/TelefonataServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/UndoServlet.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/utils/DBConnection.java
-/Users/luca.zucchetti/Library/CloudStorage/OneDrive-unibg.it/UniBG/Terzo anno/Secondo semestre/Programmazione web/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/utils/ThymeleafConfig.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/ContrattoTelefonicoDAO.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/SIMAttivaDAO.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/SIMDisattivaDAO.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/SIMNonAttivaDAO.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/dao/TelefonataDAO.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/ContrattoTelefonico.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/SIMAttiva.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/SIMDisattiva.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/SIMNonAttiva.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/model/Telefonata.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/CommitServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/CrudSimServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/MainServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/SIMAttivaServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/SIMDisattivaServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/SIMNonAttivaServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/SuggerisciContrattoLiberoServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/TelefonataServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/servlet/UndoServlet.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/utils/DBConnection.java
+/Users/leonardoleggeri/Desktop/PROGETTI/Progetto_WEB/Progetto_WEB_2526/PROGETTO2_Docker/src/main/java/it/unifi/progettoweb/utils/ThymeleafConfig.java

@@ -43,33 +43,25 @@ echo "🗄️  Fase 1: Configurazione Database MySQL"
 
 # Credenziali di default del progetto
 DB_USER="root"
-DB_PASS="leonardo"
+DB_PASS=""
 
 echo "⏳ Verifica stato MySQL in corso..."
-if mysql -u $DB_USER -p$DB_PASS -e "SELECT 1;" &> /dev/null; then
-    MYSQL_CMD="mysql -u $DB_USER -p$DB_PASS"
-elif mysql -u $DB_USER -e "SELECT 1;" &> /dev/null; then
+
+# 1. Prova senza password
+if mysql -u $DB_USER -e "SELECT 1;" &> /dev/null; then
     MYSQL_CMD="mysql -u $DB_USER"
+    echo "db.password=" > src/main/resources/db.properties
 else
-    echo "⚠️ Impossibile connettersi come utente standard. Tento l'accesso tramite sudo per fix automatico (inserisci la password del PC se richiesta)..."
-    if sudo mysql -e "SELECT 1;" &> /dev/null; then
-        echo "✅ Accesso root riuscito. Configuro l'utente '$DB_USER' per accettare la password..."
-        sudo mysql -e "ALTER USER '$DB_USER'@'localhost' IDENTIFIED WITH caching_sha2_password BY '$DB_PASS'; FLUSH PRIVILEGES;" &> /dev/null
-        if [ $? -ne 0 ]; then
-            # Se la sintassi precedente fallisce (versioni più vecchie), prova la native
-            sudo mysql -e "ALTER USER '$DB_USER'@'localhost' IDENTIFIED WITH mysql_native_password BY '$DB_PASS'; FLUSH PRIVILEGES;" &> /dev/null
-        fi
-        
-        # Verifica se il fix ha funzionato
-        if mysql -u $DB_USER -p$DB_PASS -e "SELECT 1;" &> /dev/null; then
-            MYSQL_CMD="mysql -u $DB_USER -p$DB_PASS"
-            echo "✅ Configurazione automatica di MySQL completata!"
-        else
-            echo "❌ Errore: fix automatico fallito. Assicurati che l'utente root possa loggarsi."
-            exit 1
-        fi
+    # 2. Se fallisce, chiedi la password all'utente
+    echo "⚠️ Impossibile accedere a MySQL senza password."
+    read -sp "👉 Inserisci la tua password di MySQL per l'utente 'root' (premi invio se è vuota): " DB_PASS
+    echo ""
+    
+    if mysql -u $DB_USER -p"$DB_PASS" -e "SELECT 1;" &> /dev/null; then
+        MYSQL_CMD="mysql -u $DB_USER -p$DB_PASS"
+        echo "db.password=$DB_PASS" > src/main/resources/db.properties
     else
-        echo "❌ Errore durante la connessione a MySQL. Impossibile creare il database."
+        echo "❌ Password errata o MySQL non in esecuzione."
         echo "👉 Assicurati che MySQL sia installato e in esecuzione (sudo systemctl status mysql)."
         exit 1
     fi

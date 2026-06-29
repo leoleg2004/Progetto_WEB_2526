@@ -87,24 +87,30 @@ if %errorlevel% neq 0 (
 echo [INFO] Attendo avvio MySQL...
 timeout /t 6 /nobreak >nul
 
-:: ---- Prova connessione: senza password, poi con "leonardo" ----
+:: ---- Prova connessione: senza password ----
 set "DB_USER=root"
 set "DB_PASS="
 set "MYSQL_CMD="
 
+if not exist "src\main\resources" mkdir "src\main\resources"
+
 "%MYSQL_EXE%" -u %DB_USER% --connect-timeout=5 -e "SELECT 1;" >nul 2>&1
 if %errorlevel% equ 0 (
     set "DB_PASS="
+    echo db.password=> "src\main\resources\db.properties"
     goto :mysql_ok
 )
 
-"%MYSQL_EXE%" -u %DB_USER% -pleonardo --connect-timeout=5 -e "SELECT 1;" >nul 2>&1
+echo [AVVISO] Impossibile accedere a MySQL senza password.
+set /p DB_PASS="Inserisci la tua password di MySQL per l'utente 'root': "
+
+"%MYSQL_EXE%" -u %DB_USER% -p"%DB_PASS%" --connect-timeout=5 -e "SELECT 1;" >nul 2>&1
 if %errorlevel% equ 0 (
-    set "DB_PASS=leonardo"
+    echo db.password=%DB_PASS%> "src\main\resources\db.properties"
     goto :mysql_ok
 )
 
-echo [ERRORE] Impossibile connettersi a MySQL con root (senza password o con "leonardo").
+echo [ERRORE] Password errata o MySQL non in esecuzione.
 echo Apri MySQL Workbench o mysql_configurator.exe per verificare le credenziali.
 pause
 exit /b 1
