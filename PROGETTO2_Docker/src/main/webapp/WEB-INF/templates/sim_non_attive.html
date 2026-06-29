@@ -68,7 +68,7 @@
                                 <td>
                                     <div class="actions">
                                         <button class="btn btn-sm btn-edit" th:attr="onclick=|openUpdateModal('${row.codice}', '${row.tipoSIM}')|">Modifica</button>
-                                        <button class="btn btn-sm" style="background-color: #3498DB; color: white; border:none;" th:attr="onclick=|openActivateModal('${row.codice}')|">Attiva SIM</button>
+                                        <button class="btn btn-sm" class="btn btn-sm btn-activate" th:attr="onclick=|openActivateModal('${row.codice}')|">Attiva SIM</button>
                                         <button class="btn btn-sm btn-delete" th:attr="onclick=|openDeleteModal('${row.codice}')|">Elimina</button>
                                     </div>
                                 </td>

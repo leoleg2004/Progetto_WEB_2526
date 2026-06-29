@@ -336,50 +336,55 @@ body {
 }
 
 .btn-edit {
-    background-color: var(--bg-body);
+    background-color: #FFFFFF;
     color: var(--brand-hover);
     border: 1px solid var(--brand-primary);
 }
 
 .btn-deactivate {
-    background-color: #FFF7EC;
+    background-color: #FFFFFF;
     color: #E67E22;
     border: 1px solid #FFE1A8;
 }
 
 .btn-activate {
-    background-color: #EBFBFA;
+    background-color: #FFFFFF;
     color: #00B4D8;
     border: 1px solid #90E0EF;
 }
 
 .btn-delete {
-    background-color: #FFF0F0;
+    background-color: #FFFFFF;
     color: #E63946;
     border: 1px solid #FFCDD2;
 }
 
 .btn-edit:hover {
-    background-color: var(--brand-primary);
-    color: #FFF;
+    background-color: #FFFFFF;
+    color: var(--brand-primary);
     border-color: var(--brand-primary);
+    box-shadow: 0 4px 10px rgba(255, 183, 3, 0.2);
 }
 
 .btn-deactivate:hover {
-    background-color: #E67E22;
-    color: white;
+    background-color: #FFFFFF;
+    color: #D35400;
     border-color: #E67E22;
+    box-shadow: 0 4px 10px rgba(230, 126, 34, 0.2);
 }
 
 .btn-activate:hover {
-    background-color: #00B4D8;
-    color: white;
+    background-color: #FFFFFF;
+    color: #0077B6;
     border-color: #00B4D8;
+    box-shadow: 0 4px 10px rgba(0, 180, 216, 0.2);
 }
 
 .btn-delete:hover {
-    background-color: #E63946;
-    color: white;
+    background-color: #FFFFFF;
+    color: #C1121F;
+    border-color: #E63946;
+    box-shadow: 0 4px 10px rgba(230, 57, 70, 0.2);
 }
 
 /* Contenitore dei bottoni Modifica / Elimina nelle righe della tabella */
@@ -542,15 +547,15 @@ body {
 }
 
 .pagination a {
-    background-color: var(--bg-surface);
+    background-color: #FFFFFF;
     color: var(--text-strong);
     border: 2px solid var(--border-color);
     box-shadow: var(--shadow-soft);
 }
 
 .pagination a:hover {
-    background-color: var(--brand-hover);
-    color: var(--text-header);
+    background-color: #FFFFFF;
+    color: var(--brand-hover);
     border-color: var(--brand-hover);
     transform: translateY(-4px);
     box-shadow: 0 10px 20px rgba(251, 133, 0, 0.4);

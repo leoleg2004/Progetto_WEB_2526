@@ -83,7 +83,7 @@
                                     <div class="actions">
                                         <button class="btn btn-sm btn-edit" th:attr="onclick=|openUpdateModal('${row.codice}', '${row.tipoSIM}', '${row.associataA}', '${row.dataAttivazione}')|">Modifica</button>
                                         <button class="btn btn-sm btn-delete" th:attr="onclick=|openDeleteModal('${row.codice}')|">Elimina</button>
-                                        <button class="btn btn-sm" style="background-color: #E67E22; color: white; border:none;" th:attr="onclick=|openDeactivateModal('${row.codice}')|">Disattiva</button>
+                                        <button class="btn btn-sm btn-deactivate" th:attr="onclick=|openDeactivateModal('${row.codice}')|">Disattiva</button>
                                     </div>
                                 </td>
                             </tr>
